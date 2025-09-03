@@ -1,5 +1,11 @@
-def getFormattedTimestamp() {
-    return sh(script: 'date +"%d-%b-%Y, %a %H:%M:%S"', returnStdout: true).trim()
+def date() {
+    return sh(script: 'date +"%d-%b-%Y"', returnStdout: true).trim()
+}
+def day() {
+    return sh(script: 'date +"%A"', returnStdout: true).trim()
+}
+def time() {
+    return sh(script: 'date +"%H:%M:%S"', returnStdout: true).trim()
 }
 
 def author() {
@@ -12,25 +18,44 @@ def localIP() {
     return sh(script: "hostname -I | awk '{print $1}'", returnStdout: true).trim()
 
 }
+def hostName() {
+    return sh(script: "hostname", returnStdout: true).trim()
+}
 
 def notify(String status) {
-    def buildTime = duration()               // Call your shared lib step
-    def now = getFormattedTimestamp()        // Get formatted timestamp
+    def date = date()
+    def day = day()
+    def time = time()
+    def buildTime = duration()           
     def auth = author()
     def msg = message()
     def lclIP = localIP()
+    def hstName = hostName()
 
 
     // def message = "${status} - Job: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Duration: ${buildTime} - Time: ${now}"
 
     def telegramText = """
-    ✅ Status : ${status}
-    👤 Commit by: ${auth}
-    📝 Message: ${msg}
-    📦 Job: ${env.JOB_NAME} #${env.BUILD_NUMBER}
-    📅 Duration: ${buildTime}
-    📅 Time: ${now}
-    📍 Local IP: ${lclIP}
+    ------------------------------
+
+    PROJECT : ${env.PROJECT_NAME}
+    STATUS : ${status}
+    BUILD VERSION : ${env.BUILD_VERSION}
+
+    ------------------------------
+
+    Date : ${date}
+    Day : ${day}
+    Time : ${time}
+
+    ------------------------------
+
+    COMMIT BY: ${auth}
+    MESSAGE: ${msg}
+    DURATION: ${buildTime}
+    LOCAL IP: ${lclIP}
+    SUBDOMAIN: ${env.SUBDOMAIN}
+    HOSTNAME: ${hstName}
     """.trim()
 
     sh """
