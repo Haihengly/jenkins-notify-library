@@ -14,10 +14,6 @@ def author() {
 def message() {
     return sh(script: "git log -1 --pretty=format:'%s'", returnStdout: true).trim()
 }
-def localIP() {
-    return sh(script: "hostname -I | awk '{print $1}'", returnStdout: true).trim()
-
-}
 
 def notify(String status) {
     def date = date()
@@ -26,7 +22,6 @@ def notify(String status) {
     def buildTime = duration()           
     def auth = author()
     def msg = message()
-    def lclIP = localIP()
 
 
     // def message = "${status} - Job: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Duration: ${buildTime} - Time: ${now}"
@@ -49,7 +44,6 @@ def notify(String status) {
     COMMIT BY: ${auth}
     MESSAGE: ${msg}
     DURATION: ${buildTime}
-    LOCAL IP: ${lclIP}
     SUBDOMAIN: ${env.SUBDOMAIN}
     """.trim()
 
