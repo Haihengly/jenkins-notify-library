@@ -1,10 +1,5 @@
-def duration(){
+def call() {
     def durationMs = currentBuild.duration
     def durationStr = currentBuild.durationString
     echo "Build took: ${durationStr} (${durationMs} ms)"
-                sh """
-                curl -s -X POST "https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage" \
-                -d chat_id="${env.CHAT_ID}" \
-                -d text="Build finished in ${durationStr} - Job: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
-                """
 }
