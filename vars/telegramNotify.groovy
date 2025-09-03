@@ -8,13 +8,17 @@ def author() {
 def message() {
     return sh(script: "git log -1 --pretty=format:'%s'", returnStdout: true).trim()
 }
+def localIP() {
+    return sh(script: "hostname -I | awk '{print $1}'", returnStdout: true).trim()
 
+}
 
 def notify(String status) {
     def buildTime = duration()               // Call your shared lib step
     def now = getFormattedTimestamp()        // Get formatted timestamp
     def auth = author()
     def msg = message()
+    def lclIP = localIP()
 
 
     // def message = "${status} - Job: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Duration: ${buildTime} - Time: ${now}"
@@ -26,6 +30,7 @@ def notify(String status) {
     📦 Job: ${env.JOB_NAME} #${env.BUILD_NUMBER}
     📅 Duration: ${buildTime}
     📅 Time: ${now}
+    📍 Local IP: ${lclIP}
     """.trim()
 
     sh """
