@@ -27,23 +27,23 @@ def notify(String status) {
     // def message = "${status} - Job: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Duration: ${buildTime} - Time: ${now}"
 
     def telegramText = """
-    ------------------------------
+    -------------------------------
 
-    PROJECT : ${env.JOB_NAME}
-    STATUS : ${status}
-    BUILD VERSION : ${env.BUILD_NUMBER}
-
-    ------------------------------
-
-    Date : ${date}
-    Day : ${day}
-    Time : ${time}
+    🗂️ PROJECT : ${env.JOB_NAME}
+    📊 STATUS : ${status}
+    ⚙️ BUILD VERSION : ${env.BUILD_NUMBER}
 
     ------------------------------
 
-    COMMIT BY: ${auth}
-    MESSAGE: ${msg}
-    DURATION: ${buildTime}
+    📅 Date : ${date}
+    🌓 Day : ${day}
+    ⏰ Time : ${time}
+
+    ------------------------------
+
+    👤 COMMIT BY: ${auth}
+    📩 MESSAGE: ${msg}
+    ⏳ DURATION: ${buildTime}
     """
 
     sh """
