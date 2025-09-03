@@ -18,9 +18,6 @@ def localIP() {
     return sh(script: "hostname -I | awk '{print $1}'", returnStdout: true).trim()
 
 }
-def hostName() {
-    return sh(script: "hostname", returnStdout: true).trim()
-}
 
 def notify(String status) {
     def date = date()
@@ -30,7 +27,6 @@ def notify(String status) {
     def auth = author()
     def msg = message()
     def lclIP = localIP()
-    def hstName = hostName()
 
 
     // def message = "${status} - Job: ${env.JOB_NAME} #${env.BUILD_NUMBER} - Duration: ${buildTime} - Time: ${now}"
@@ -55,7 +51,6 @@ def notify(String status) {
     DURATION: ${buildTime}
     LOCAL IP: ${lclIP}
     SUBDOMAIN: ${env.SUBDOMAIN}
-    HOSTNAME: ${hstName}
     """.trim()
 
     sh """
