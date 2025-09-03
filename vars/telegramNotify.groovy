@@ -29,9 +29,9 @@ def notify(String status) {
     def telegramText = """
     ------------------------------
 
-    PROJECT : ${env.PROJECT_NAME}
+    PROJECT : ${env.JOB_NAME}
     STATUS : ${status}
-    BUILD VERSION : ${env.BUILD_VERSION}
+    BUILD VERSION : ${env.BUILD_NUMBER}
 
     ------------------------------
 
@@ -44,8 +44,7 @@ def notify(String status) {
     COMMIT BY: ${auth}
     MESSAGE: ${msg}
     DURATION: ${buildTime}
-    SUBDOMAIN: ${env.SUBDOMAIN}
-    """.trim()
+    """
 
     sh """
     curl -s -X POST "https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage" \
