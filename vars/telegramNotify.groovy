@@ -18,7 +18,7 @@ def message() {
 def notify(String status) {
 
     def statusMessages = [
-        SUCCESS: "SUCCESS ✅",
+        SUCCESS: "BUILD SUCCESS ✅",
         FAILURE: "FAILED ❌",
         UNSTABLE: "UNSTABLE ⚠️"
     ]
