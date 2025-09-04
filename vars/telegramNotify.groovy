@@ -18,9 +18,9 @@ def message() {
 def notify(String status) {
 
     def statusMessages = [
-        SUCCESS: "✅ Build Succeeded",
-        FAILURE: "❌ Build Failed",
-        UNSTABLE: "⚠️ Build Unstable"
+        SUCCESS: "SUCCESS ✅",
+        FAILURE: "FAILED ❌",
+        UNSTABLE: "UNSTABLE ⚠️"
     ]
 
     def displayStatus = statusMessages.get(status, status) // fallback to raw status
