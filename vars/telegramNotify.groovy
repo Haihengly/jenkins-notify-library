@@ -14,8 +14,14 @@ def author() {
 def message() {
     return sh(script: "git log -1 --pretty=format:'%s'", returnStdout: true).trim()
 }
+def statusMessages = [
+    SUCCESS: "✅ Build Succeeded",
+    FAILURE: "❌ Build Failed",
+    UNSTABLE: "⚠️ Build Unstable"
+]
 
 def notify(String status) {
+    def displayStatus = statusMessages.get(status, status) // fallback to raw status
     def nowDate = date()
     def nowDay = day()
     def nowTime = time()
@@ -30,7 +36,7 @@ def notify(String status) {
     -------------------------------
 
     🗂️ PROJECT : ${env.JOB_NAME}
-    📊 STATUS : ${status}
+    📊 STATUS : ${displayStatus}
     ⚙️ BUILD VERSION : ${env.BUILD_NUMBER}
 
     ------------------------------
