@@ -16,10 +16,10 @@ def message() {
 }
 
 def notify(String status) {
-    def date = date()
-    def day = day()
-    def time = time()
-    def buildTime = duration()           
+    def nowDate = date()
+    def nowDay = day()
+    def nowTime = time()
+    def buildTime = duration()
     def auth = author()
     def msg = message()
 
@@ -35,9 +35,9 @@ def notify(String status) {
 
     ------------------------------
 
-    📅 Date : ${date}
-    🌓 Day : ${day}
-    ⏰ Time : ${time}
+    📅 Date : ${nowDate}
+    🌓 Day : ${nowDay}
+    ⏰ Time : ${nowTime}
 
     ------------------------------
 
