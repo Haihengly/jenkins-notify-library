@@ -1,6 +1,3 @@
-def date() {
-    return sh(script: 'date +"%d-%b-%Y"', returnStdout: true).trim()
-}
 def day() {
     return sh(script: 'date +"%A"', returnStdout: true).trim()
 }
