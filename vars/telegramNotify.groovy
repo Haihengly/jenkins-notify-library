@@ -1,17 +1,3 @@
-def day() {
-    return sh(script: 'date +"%A"', returnStdout: true).trim()
-}
-def time() {
-    return sh(script: 'date +"%H:%M:%S"', returnStdout: true).trim()
-}
-
-def author() {
-    return sh(script: "git log -1 --pretty=format:'%an'", returnStdout: true).trim()
-}
-def message() {
-    return sh(script: "git log -1 --pretty=format:'%s'", returnStdout: true).trim()
-}
-
 def notify(String status) {
 
     def statusMessages = [
